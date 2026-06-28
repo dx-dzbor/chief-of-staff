@@ -1,0 +1,14 @@
+# Generated briefs and outputs
+briefs/
+*.html
+
+# Local agent settings
+.claude/settings.local.json
+
+# Python (if you add a brief renderer later)
+__pycache__/
+*.pyc
+
+# OS noise
+.DS_Store
+Thumbs.db
