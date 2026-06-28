@@ -17,36 +17,43 @@ and your AI agent can read all of it.
 | Direction | `current-drive`, `weekly-goals`, `long_term_goals`, `waiting-on`, `exec_steer` | Where you are pointed, this week and this year. |
 | Project memory | `projects/*.md` | One durable file per active initiative. |
 | People memory | `stakeholders/top|other/*.md`, `team/*.md` | Relationships, what people care about, what is owed. |
-| Capture and output | `debriefs/*`, `updates/*` | Raw daily dumps and the compounding update ledger. |
-| Signal layer | (optional) | Where live or mocked signals would feed in. Not included by default. |
+| Capture and output | `debriefs/*`, `updates/*`, `briefs/*.html` | Raw daily dumps, the compounding update ledger, and generated briefs. |
+| Signal layer | (optional) | Slack, email, calendar, meeting notes. None bundled; the skills use them if present and skip them gracefully if not. |
 
 ## 3. The Daily / Weekly Loop
 
 ```text
-morning   /brief           what matters today
+morning   /brief           write briefs/YYYY-MM-DD.html, open it, refresh the index, log an entry
 day       (do the work)
-evening   /debrief         capture the day, route it into the base
+evening   /debrief         capture the day, route it into the base after approval
 weekly    /os-review       health check
 weekly+   /weekly-status   draft a status from the ledger
 ```
 
+The loop has a deliberate asymmetry: `/brief` is a read pass that writes only the brief, the index, and
+a log line; `/debrief` is the only write pass for real knowledge, and it always shows a plan first.
+
 ### `/brief` - the morning brief
 
-Reads your base and produces a prioritized brief: your current drive, today's focus, where you are the
-blocker, who you are waiting on, project state, stakeholder open asks, and a quick narrative and
-expectations check. It does not write anything. Run it first thing.
+Reads your base (and any connectors you have wired up) and writes a dated HTML brief to
+`briefs/YYYY-MM-DD.html`, opens it, refreshes `index.md`, and appends a log entry. The HTML is the
+artifact, so it does not summarize itself in chat. Sections, in order: driving end-to-end, today's
+focus, an acceleration check (the signature "is this maximally accelerated?" lens), today's calendar
+shape, where you are the blocker, who you are waiting on, project updates, top stakeholders, broader
+context, and a Monday expectations check. Run it first thing.
 
-The version shipped here outputs the brief in chat as markdown. It is intentionally simple. See
-"Extending the System" if you want a richer rendered output.
+No Python is required: the agent authors the HTML directly. If you want a faster, deterministic
+renderer, you can drop in a script later, see "Extending the System."
 
 ### `/debrief` - the evening capture
 
-You paste a free-text dump of your day. The skill matches each line against the `aliases` in your
-project and people files and proposes a routing plan: which lines go to which project `## Notes`, which
-stakeholder `## Interaction Log` or `## Advice & Suggestions`, which team `## Notes` or
-`## Stakeholder Feedback`. It also extracts waiting-on items and ledger nuggets. It shows the plan and
-waits for your approval before writing. This is the engine that makes the base compound, so debrief
-even when the day was quiet.
+You paste a free-text dump of your day (and the skill optionally enriches it from today's meeting
+notes if you have a provider wired up). It matches each line against the `aliases` in your project and
+people files and proposes a routing plan: which lines go to which project `## Notes`, which stakeholder
+`## Interaction Log` or `## Advice & Suggestions`, which team `## Notes` or `## Stakeholder Feedback`.
+It also opens and clears waiting-on items and appends ledger nuggets. It shows the full plan and waits
+for your approval before writing anything, then saves your raw dump verbatim. This is the engine that
+makes the base compound, so debrief even when the day was quiet.
 
 ### `/os-review` - the health audit
 
@@ -113,15 +120,15 @@ sample you can delete).
 
 ## 8. Extending the System
 
-The shipped `/brief` and `/debrief` are deliberately basic so the repo runs anywhere with no
-dependencies. Two common upgrades:
+The shipped `/brief` and `/debrief` carry the full operating logic but run with zero dependencies: the
+agent authors the HTML brief itself and every connector scan is optional. Common upgrades:
 
-- **A richer brief.** Replace the prose brief with a script that gathers signals and renders a
-  formatted (for example HTML) brief. Keep the same inputs (`current-drive`, `weekly-goals`,
-  `projects/*`, `stakeholders/top/*`, `waiting-on`, `expectations`) and have the skill call your
-  script. Point the `/brief` skill at it.
-- **Live signals.** Add a signal layer that pulls from Slack, email, or calendar into a structured
-  file, then have `/brief` read that alongside the markdown base. Keep the safe-by-default rule: read
-  and draft, never auto-send.
+- **A script-based brief renderer.** For speed and deterministic output, replace the agent-authored
+  HTML with a script that gathers signals and renders the page. Keep the same inputs (`current-drive`,
+  `weekly-goals`, `projects/*`, `stakeholders/top/*`, `waiting-on`, `expectations`) and the same
+  section order so it is a drop-in, then point the `/brief` skill at it.
+- **Live connectors.** Wire up Slack, Gmail, Calendar, or a meeting-notes provider. The skills already
+  describe how each is used (`/brief` scans them; `/debrief` enriches the dump from meeting notes).
+  Keep the safe-by-default rule: read and draft, never auto-send.
 
 Whatever you add, keep the invariants in section 6. They are what make the system trustworthy.

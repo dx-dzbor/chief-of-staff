@@ -47,14 +47,15 @@ Read `CONTEXT.md` for the design and `MANUAL.md` for day-to-day use.
 
 | Command | What it does |
 | --- | --- |
-| `/brief` | Reads your base and surfaces what matters this morning: your current drive, today's focus, where you are the blocker, who you are waiting on, project state, and stakeholder asks. |
+| `/brief` | Reads your base (and any connectors you have wired up) and writes a dated HTML brief: your current drive, today's focus, an acceleration check, calendar shape, where you are the blocker, who you are waiting on, project state, and stakeholder asks. Opens it in the browser. |
 | `/debrief` | You paste a free-text dump of your day; it routes each line into the right project, stakeholder, and team files, and appends nuggets to the update ledger. Shows a plan and waits for approval before writing. |
 | `/os-review` | A read-only audit: stale advice, inactive projects, dormant relationships, placeholder text left unfilled. |
 | `/weekly-status` | Drafts a weekly status from the update ledger and your weekly goals. |
 
-The `brief` and `debrief` skills shipped here are intentionally **basic**. They work out of the box on
-your markdown base. Swap in a richer version (for example a script that renders an HTML brief) whenever
-you like. See "Extending the System" in `MANUAL.md`.
+The `brief` and `debrief` skills carry the full operating logic but run with **zero dependencies**: the
+agent authors the HTML brief itself, and every connector (Slack, Gmail, Calendar, meeting notes) is
+optional and skipped gracefully when absent. Wire up connectors or drop in a script-based renderer
+whenever you like, and tune the skills to fit how you work. See "Extending the System" in `MANUAL.md`.
 
 ## Conventions Worth Knowing
 

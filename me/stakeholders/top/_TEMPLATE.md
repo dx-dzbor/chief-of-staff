@@ -22,9 +22,10 @@ aliases: [name, nickname]
 
 ## Advice & Suggestions
 
-<!-- Dated, with status. /debrief routes advice here. -->
+<!-- Newest first. /debrief prepends advice here with status starting at `new`.
+     Status values: new | accepted | rejected | done | stale. -->
 
-- [YYYY-MM-DD] | [source] | "[the advice]" | status: [open | in-progress | done | stale]
+- **[YYYY-MM-DD]** | new | "[the advice, verbatim or tightly preserved]"
 
 ## Open Asks
 

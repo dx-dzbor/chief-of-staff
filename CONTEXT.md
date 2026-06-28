@@ -31,20 +31,25 @@ Three properties make it work:
    `me/long_term_goals.md`, `me/waiting-on.md`, `me/exec_steer.md`.
 3. **Project memory:** `me/projects/*.md`, one durable file per active initiative.
 4. **People memory:** `me/stakeholders/top|other/*.md` and `me/team/*.md`.
-5. **Capture and output:** `me/debriefs/*`, `me/updates/*`, and any briefs you generate.
-6. **Signal layer (optional):** where live or mocked signals (Slack, email, calendar) would feed in.
-   This template ships without connectors; the brief reads the markdown base directly. See "Extending"
-   in `MANUAL.md`.
+5. **Capture and output:** `me/debriefs/*`, `me/updates/*`, and the generated `briefs/*.html`.
+6. **Signal layer (optional):** Slack, email, calendar, and meeting notes. The template bundles no
+   connectors, but the skills use them if your environment has them and skip them gracefully if not. A
+   markdown-only base still produces a full brief. See "Extending the System" in `MANUAL.md`.
 
 ## The Daily / Weekly Loop
 
 ```text
-morning   /brief              awareness: what matters today, where you are the blocker, who you are waiting on
+morning   /brief              read pass: write briefs/YYYY-MM-DD.html, refresh the index, log an entry
 day       (do the work)
-evening   /debrief            capture: route the day into the base, feed the update ledger
+evening   /debrief            write pass: route the day into the base after approval, feed the ledger
 weekly    /os-review          health check: stale advice, inactive projects, dropped balls
 weekly+   /weekly-status      turn captured work into a status draft
 ```
+
+The asymmetry is the safety model. `/brief` is a read pass: it reads the base (and any connectors) and
+writes only the generated HTML, the regenerated index, and a log entry. `/debrief` is the only command
+that writes meaningful new knowledge, and it never writes before showing a routing plan and getting
+approval.
 
 ## Folder Contract
 
@@ -66,6 +71,7 @@ personal_os/
     team/                        one file per team member
     debriefs/                    raw evening dumps
     updates/                     config.md, raw/YYYY-MM.md (ledger), YYYY-MM/_month-summary.md
+  briefs/                        generated morning briefs (YYYY-MM-DD.html), git-ignored
   .claude/
     commands/                    slash-command wrappers
     skills/                      brief, debrief, os-review, weekly-status
@@ -158,7 +164,8 @@ compound instead of becoming a chore.
 
 ## What This Template Deliberately Excludes
 
-Real connectors, a database, persistent vector memory, auth, and multi-user permissions. The base is
-plain markdown for you and your agent to read, and for the prompt-driven skills to operate on. Those
-integrations are real concerns, but the value here is the operating logic and the data contract. See
-`MANUAL.md` for how to bolt on a richer brief renderer or live signals later.
+No bundled connectors, database, persistent vector memory, auth, or multi-user permissions. The skills
+will use Slack, Gmail, Calendar, or a meeting-notes provider if your environment exposes them, but
+nothing is shipped or required, and every scan degrades gracefully. The base is plain markdown for you
+and your agent to read and for the skills to operate on. The value here is the operating logic and the
+data contract. See `MANUAL.md` for how to wire in connectors or swap the brief for a script renderer.

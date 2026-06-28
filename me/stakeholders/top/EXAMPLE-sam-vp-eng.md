@@ -22,7 +22,7 @@ slipping.
 
 ## Advice & Suggestions
 
-- [2026-01-08] | Sam | "Give me a weekly progress signal I can use in exec reviews." | status: in-progress
+- **2026-01-08** | accepted | "Give me a weekly progress signal I can use in exec reviews."
 
 ## Open Asks
 

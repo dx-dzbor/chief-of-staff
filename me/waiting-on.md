@@ -5,10 +5,15 @@ status: active
 
 # Waiting On
 
-Things other people owe you. `/debrief` appends here; `/brief` surfaces these with age and staleness
-flags so nothing quietly drops. Newest entries go at the bottom.
+Things other people owe you. `/debrief` prepends new open items and moves cleared ones; `/brief`
+surfaces open items with overdue and stale flags so nothing quietly drops.
 
-<!-- Format: -->
-<!-- - [YYYY-MM-DD] <who> | <what you are waiting for> | <channel> | flag: ok|stale|overdue -->
+## Open
 
-(empty - this fills up as you debrief)
+<!-- Newest first. Format: -->
+<!-- - [ ] YYYY-MM-DD | <person-slug> | <what is owed> | needed-by: YYYY-MM-DD|none | re: [[<project-slug>]] -->
+
+## Cleared
+
+<!-- Newest first. Format: -->
+<!-- - [x] YYYY-MM-DD | <person-slug> | <what was owed> | cleared: YYYY-MM-DD | source: <dump|meeting-notes> -->

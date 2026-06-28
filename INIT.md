@@ -74,9 +74,11 @@ Ask:
 
 Then write:
 
-- `me/current-drive.md`, `me/weekly-goals.md` (set `week_of` to this week's Monday),
-  `me/long_term_goals.md`, `me/exec_steer.md`.
-- Leave `me/waiting-on.md` and `me/log.md` mostly empty; they fill up through daily use.
+- `me/current-drive.md` - fill the `## Narrative` one-liner, the `period` frontmatter, the live
+  blocker, and the next move; the brief renders these as its banner.
+- `me/weekly-goals.md` (set `week_of` to this week's Monday), `me/long_term_goals.md`,
+  `me/exec_steer.md`.
+- Leave `me/waiting-on.md` and `me/log.md` empty; they fill up through daily use.
 
 ### Step 4 - Projects
 
@@ -123,9 +125,25 @@ Ask which stakeholders the weekly/monthly status drafts should cover by default.
 3. **Show the result.** Summarize what you created: how many projects, stakeholders, and team files,
    and which files still need attention.
 4. **Hand off.** Tell the owner what to do next:
-   - Run `/brief` to see their first morning brief.
+   - Run `/brief` to generate their first morning brief.
    - At the end of the day, run `/debrief` and paste a dump of what happened.
    - Weekly, run `/os-review` and `/weekly-status`.
    - Read `MANUAL.md` for the full workflow and how to extend the system.
 
-That is it. The base will get sharper every time they debrief.
+## Tune The Skills After A Few Days
+
+Tell the owner this explicitly, then move on: the `/brief` and `/debrief` skills ship with sensible
+defaults, but they are meant to be edited. After running the loop for a few days, open
+`.claude/skills/brief/SKILL.md` and `.claude/skills/debrief/SKILL.md` and adjust them to fit how the
+owner actually works. Common tweaks:
+
+- **Brief:** reorder or drop sections; change the acceleration check to the owner's own signature
+  lens; set per-project `coverage` defaults; wire up connectors (Slack, Gmail, Calendar); or point the
+  skill at a script-based HTML renderer for speed.
+- **Debrief:** add routing keywords and aliases the owner actually uses; adjust which nuggets count as
+  update-worthy; enable meeting-notes enrichment if a provider is available.
+
+If the owner has their own polished brief or debrief implementation, this is where it drops in.
+
+That is it. The base gets sharper every time they debrief, and the skills get sharper every time they
+tune them.
