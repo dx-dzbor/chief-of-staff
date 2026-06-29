@@ -1,4 +1,4 @@
-![Personal OS: AI Chief of Staff](docs/diagram.svg)
+![Personal OS: AI Chief of Staff](docs/banner.png)
 
 # Personal OS — AI Chief of Staff
 
