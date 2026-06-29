@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Segoe UI', system-ui, sans-serif">
+
+  <!-- Background -->
+  <rect width="900" height="500" rx="16" fill="#f8f7f4"/>
+
+  <!-- Title -->
+  <text x="450" y="44" text-anchor="middle" font-size="21" font-weight="700" fill="#1a1a2e">Personal OS: AI Chief of Staff</text>
+  <text x="450" y="64" text-anchor="middle" font-size="12.5" fill="#666">Plain markdown files + four skills. Compounds every day you use it.</text>
+
+  <!-- ── LEFT COLUMN: Your Context (me/ files) ── -->
+  <rect x="32" y="88" width="178" height="314" rx="12" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="121" y="113" text-anchor="middle" font-size="13" font-weight="700" fill="#3730a3">Your Context</text>
+  <text x="121" y="129" text-anchor="middle" font-size="11" fill="#6366f1">me/ files</text>
+
+  <rect x="48" y="143" width="146" height="34" rx="7" fill="#fff" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="121" y="164" text-anchor="middle" font-size="11.5" fill="#312e81">Identity + Voice</text>
+
+  <rect x="48" y="184" width="146" height="34" rx="7" fill="#fff" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="121" y="205" text-anchor="middle" font-size="11.5" fill="#312e81">Current Drive</text>
+
+  <rect x="48" y="225" width="146" height="34" rx="7" fill="#fff" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="121" y="246" text-anchor="middle" font-size="11.5" fill="#312e81">Projects (3-5)</text>
+
+  <rect x="48" y="266" width="146" height="34" rx="7" fill="#fff" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="121" y="287" text-anchor="middle" font-size="11.5" fill="#312e81">Stakeholders</text>
+
+  <rect x="48" y="307" width="146" height="34" rx="7" fill="#fff" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="121" y="328" text-anchor="middle" font-size="11.5" fill="#312e81">Team</text>
+
+  <rect x="48" y="348" width="146" height="34" rx="7" fill="#fff" stroke="#e0e7ff" stroke-width="1"/>
+  <text x="121" y="369" text-anchor="middle" font-size="11.5" fill="#312e81">Update Ledger</text>
+
+  <!-- ── CENTER: AI Agent Brain ── -->
+  <circle cx="450" cy="220" r="86" fill="#ede9fe" opacity="0.5"/>
+  <circle cx="450" cy="220" r="70" fill="#7c3aed" opacity="0.12"/>
+  <circle cx="450" cy="220" r="56" fill="#7c3aed"/>
+
+  <!-- simplified brain shape in white -->
+  <path d="M436 206 Q442 196 450 202 Q456 192 464 198 Q472 190 476 202 Q482 210 476 220 Q482 230 474 238 Q468 246 460 240 Q454 250 446 242 Q438 246 434 236 Q428 228 434 218 Q428 210 436 206Z" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.8"/>
+  <line x1="450" y1="202" x2="450" y2="242" stroke="rgba(255,255,255,0.5)" stroke-width="1.4"/>
+  <path d="M434 220 Q450 216 476 220" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.4"/>
+
+  <text x="450" y="292" text-anchor="middle" font-size="13" font-weight="700" fill="#5b21b6">AI Agent</text>
+  <text x="450" y="308" text-anchor="middle" font-size="11" fill="#7c3aed">reads, reasons, writes</text>
+
+  <!-- Four skill pills below center -->
+  <rect x="310" y="330" width="58" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="339" y="347" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5b21b6">/brief</text>
+
+  <rect x="376" y="330" width="66" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="409" y="347" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5b21b6">/debrief</text>
+
+  <rect x="450" y="330" width="80" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="490" y="347" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5b21b6">/os-review</text>
+
+  <rect x="538" y="330" width="58" height="26" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="567" y="347" text-anchor="middle" font-size="10.5" font-weight="600" fill="#5b21b6">/status</text>
+
+  <text x="450" y="323" text-anchor="middle" font-size="10" fill="#9ca3af">four skills</text>
+
+  <!-- ── RIGHT COLUMN: Daily Outputs ── -->
+  <rect x="690" y="88" width="178" height="314" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="779" y="113" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Daily Outputs</text>
+
+  <rect x="706" y="131" width="146" height="50" rx="7" fill="#fff" stroke="#d1fae5" stroke-width="1"/>
+  <text x="779" y="151" text-anchor="middle" font-size="11.5" font-weight="600" fill="#065f46">Morning Brief</text>
+  <text x="779" y="167" text-anchor="middle" font-size="10" fill="#6b7280">HTML, opens in browser</text>
+
+  <rect x="706" y="189" width="146" height="50" rx="7" fill="#fff" stroke="#d1fae5" stroke-width="1"/>
+  <text x="779" y="209" text-anchor="middle" font-size="11.5" font-weight="600" fill="#065f46">Routed Notes</text>
+  <text x="779" y="225" text-anchor="middle" font-size="10" fill="#6b7280">day dump filed away</text>
+
+  <rect x="706" y="247" width="146" height="50" rx="7" fill="#fff" stroke="#d1fae5" stroke-width="1"/>
+  <text x="779" y="267" text-anchor="middle" font-size="11.5" font-weight="600" fill="#065f46">Weekly Status</text>
+  <text x="779" y="283" text-anchor="middle" font-size="10" fill="#6b7280">drafted from ledger</text>
+
+  <rect x="706" y="305" width="146" height="50" rx="7" fill="#fff" stroke="#d1fae5" stroke-width="1"/>
+  <text x="779" y="325" text-anchor="middle" font-size="11.5" font-weight="600" fill="#065f46">OS Health Audit</text>
+  <text x="779" y="341" text-anchor="middle" font-size="10" fill="#6b7280">stale items, gaps</text>
+
+  <!-- ── ARROWS ── -->
+  <defs>
+    <marker id="arr-v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#34d399"/>
+    </marker>
+    <marker id="arr-y" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#fbbf24"/>
+    </marker>
+  </defs>
+
+  <!-- reads: left -> center -->
+  <line x1="210" y1="220" x2="386" y2="220" stroke="#a78bfa" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-v)"/>
+  <text x="298" y="213" text-anchor="middle" font-size="10" fill="#7c3aed">reads</text>
+
+  <!-- writes: center -> right -->
+  <line x1="514" y1="220" x2="688" y2="220" stroke="#34d399" stroke-width="2" marker-end="url(#arr-g)"/>
+  <text x="601" y="213" text-anchor="middle" font-size="10" fill="#059669">writes</text>
+
+  <!-- compounding loop: bottom arc -->
+  <path d="M779 402 Q779 448 450 448 Q195 448 195 402" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-y)"/>
+  <text x="450" y="464" text-anchor="middle" font-size="10.5" fill="#d97706">/debrief routes your day back into the base — context compounds</text>
+
+  <!-- Footer -->
+  <text x="450" y="488" text-anchor="middle" font-size="10" fill="#9ca3af">No server. No database. No accounts. Just markdown and your AI agent.</text>
+
+</svg>
