@@ -1,11 +1,14 @@
-# Generated briefs and outputs
+# Generated private artifacts
+/me/
 briefs/
+explainers/
 *.html
+!docs/eli5-example.html
 
 # Local agent settings
 .claude/settings.local.json
 
-# Python (if you add a brief renderer later)
+# Optional local tools
 __pycache__/
 *.pyc
 

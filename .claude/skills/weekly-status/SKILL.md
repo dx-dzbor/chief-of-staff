@@ -1,25 +1,15 @@
 ---
 name: weekly-status
-description: Draft a weekly status from the compounding update ledger. Use when the user types /weekly-status.
-argument-hint: [--for <stakeholder-slug>]
+description: Draft a concise weekly status from the update ledger, goals, and relevant decisions. Use for /weekly-status or when the owner asks for a weekly update.
+argument-hint: "[--for <stakeholder-slug>]"
 ---
 
-# Weekly Status Skill
+# Weekly status
 
-Use when the user types `/weekly-status`. Draft only; never sends.
+If `me/` does not exist, explain that there is no private context to draft from and point to `/onboard`.
 
-## Behavior
+Draft for the owner to review and send. Never send it.
 
-1. Read the last 7 days of `me/updates/raw/YYYY-MM.md`. If the ledger is young or empty, fall back to
-   recent `me/debriefs/` and project `## Notes`.
-2. Read `me/weekly-goals.md` for the against-the-plan view.
-3. Group the status into: **shipped / in-progress / risks-and-asks / narrative / against-the-plan**.
-4. Default to one general status. `--for <slug>` tailors it to one person using their
-   `## Concerns + Patterns` and the projects you share. Default coverage comes from
-   `me/updates/config.md`.
+Read the last seven days of `me/updates/raw/YYYY-MM.md`, `me/weekly-goals.md`, and relevant active or closed entries in `me/decisions.md`. If the ledger is young or empty, use recent debriefs and project notes, and say when evidence is thin. The ledger records events; the decisions file supplies current decision state. Avoid counting the same event twice.
 
-## Rules
-
-Operates on local files only; no connectors. Use the exec register from `me/communications.md`, lead
-with the headline, concrete numbers where you have them, no em-dashes. Output is a draft for the owner
-to review and send. Never sends.
+Default to the recipients in `me/updates/config.md`. With `--for <stakeholder-slug>`, read that person's concerns and shared projects and tailor the draft to their decisions and asks. Lead with the headline. Include shipped outcomes, meaningful progress against the plan, risks or asks, and decision follow-through only where relevant. Use numbers and source links when available. Omit empty categories and unsupported claims. Apply `me/communications.md` for audience voice and keep the language direct.

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How a decision stays visible | ELI5 example</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, Segoe UI, sans-serif; color: #15233c; background: #f5f7fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+    main { max-width: 900px; margin: 0 auto; padding: clamp(20px, 5vw, 52px); }
+    .eyebrow { color: #385f9f; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.08; max-width: 15ch; margin: .5rem 0 1rem; }
+    .lead { font-size: clamp(1.05rem, 2vw, 1.25rem); max-width: 58ch; color: #44546e; }
+    .card { background: white; border: 1px solid #dae2ee; border-radius: 18px; box-shadow: 0 16px 45px #1b30500a; padding: clamp(18px, 4vw, 32px); margin-top: 28px; }
+    .diagram-wrap { overflow-x: auto; }
+    .diagram { width: 100%; min-width: 650px; height: auto; display: block; }
+    h2 { font-size: 1.25rem; margin: 0 0 .7rem; }
+    ol { padding-left: 1.4rem; margin-bottom: 0; }
+    li { padding: .25rem 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid .card { margin-top: 18px; }
+    .note { border-left: 4px solid #d19b43; padding-left: 14px; color: #4d4a43; }
+    a { color: #2458a2; }
+    footer { color: #63718a; font-size: .9rem; margin-top: 24px; }
+    @media (max-width: 650px) { .grid { grid-template-columns: 1fr; gap: 0; } }
+  </style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Fictional example · visual ELI5</p>
+  <h1>How a decision stays visible</h1>
+  <p class="lead">A decision should not disappear into yesterday's notes. This system keeps the decision and its next checkpoint where tomorrow's brief can find them.</p>
+
+  <section class="card" aria-labelledby="diagram-heading">
+    <h2 id="diagram-heading">One decision, four stops</h2>
+    <div class="diagram-wrap" role="region" aria-label="Decision flow diagram; scroll horizontally on a narrow screen" tabindex="0">
+    <svg class="diagram" viewBox="0 0 800 300" role="img" aria-labelledby="svg-title svg-description" xmlns="http://www.w3.org/2000/svg">
+      <title id="svg-title">A decision moves from debrief to review, decisions file, and next brief</title>
+      <desc id="svg-description">The owner says a decision was made. Debrief asks for review. The approved decision is stored with an owner and checkpoint. Brief then surfaces the checkpoint when it matters.</desc>
+      <defs><marker id="tip" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#5574a5" stroke-width="2"/></marker></defs>
+      <rect width="800" height="300" rx="18" fill="#f7f9fd"/>
+      <g font-family="system-ui, sans-serif" text-anchor="middle">
+        <rect x="22" y="75" width="165" height="135" rx="15" fill="#e9f0ff" stroke="#b3c9f2"/>
+        <text x="104" y="116" font-size="14" font-weight="700" fill="#244678">1. Day dump</text>
+        <text x="104" y="146" font-size="13" fill="#314967">“Pilot with one team.”</text>
+        <text x="104" y="176" font-size="12" fill="#536985">Raw words kept</text>
+
+        <rect x="218" y="75" width="165" height="135" rx="15" fill="#fff4e6" stroke="#e8c486"/>
+        <text x="300" y="116" font-size="14" font-weight="700" fill="#855a21">2. Review</text>
+        <text x="300" y="146" font-size="13" fill="#684f31">Confirm what was</text>
+        <text x="300" y="165" font-size="13" fill="#684f31">actually decided</text>
+
+        <rect x="414" y="75" width="165" height="135" rx="15" fill="#efeaff" stroke="#ccbaf2"/>
+        <text x="496" y="116" font-size="14" font-weight="700" fill="#624399">3. Decisions file</text>
+        <text x="496" y="146" font-size="13" fill="#4f4372">Owner: Riley</text>
+        <text x="496" y="166" font-size="13" fill="#4f4372">Check: Friday</text>
+
+        <rect x="610" y="75" width="165" height="135" rx="15" fill="#e8f7ef" stroke="#b5dfc8"/>
+        <text x="692" y="116" font-size="14" font-weight="700" fill="#266648">4. Next brief</text>
+        <text x="692" y="146" font-size="13" fill="#315d48">“Review pilot</text>
+        <text x="692" y="165" font-size="13" fill="#315d48">results Friday.”</text>
+      </g>
+      <g stroke="#5574a5" stroke-width="2.5" fill="none" marker-end="url(#tip)"><path d="M190 143 H211"/><path d="M386 143 H407"/><path d="M582 143 H603"/></g>
+      <text x="400" y="255" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#53647b">The update ledger remembers that the decision happened; the decisions file tracks what remains.</text>
+    </svg>
+    </div>
+    <ol>
+      <li>The owner mentions the decision in a debrief. The exact words are saved.</li>
+      <li>The agent asks before changing the current decision record.</li>
+      <li>After approval, it records the decision and any owner or checkpoint.</li>
+      <li>The next brief brings the checkpoint back when action is due.</li>
+    </ol>
+  </section>
+
+  <div class="grid">
+    <section class="card"><h2>Think of a tracked parcel</h2><p>The decision is the parcel. Its ID and checkpoint make it easy to find until it arrives.</p></section>
+    <section class="card"><h2>Where that picture breaks</h2><p class="note">A decision can change or be reversed. The record must show that change; it is not an automatic delivery system.</p></section>
+  </div>
+
+  <section class="card"><h2>What this is based on</h2><p>The workflow comes from the repository's <a href="../CONTEXT.md">context contract</a> and <a href="../.claude/skills/debrief/SKILL.md">debrief skill</a>. Project Aurora, Riley, and the pilot decision are fictional examples, not real events.</p></section>
+  <footer>Standalone HTML · no external assets or network needed</footer>
+</main>
+</body>
+</html>
