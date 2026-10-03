@@ -2,7 +2,7 @@
 
 # Personal OS: AI Chief of Staff
 
-A file-based chief of staff for people managing projects, decisions, and relationships. Your context lives in plain markdown. Five small skills turn it into a daily brief, captured notes, decision follow-through, a weekly status draft, and visual explanations. No server, database, account, or connector is required.
+A file-based chief of staff for people managing projects, decisions, and relationships. Your private context lives in plain markdown. A short onboarding flow and five daily skills turn it into a brief, captured notes, decision follow-through, a weekly status draft, and visual explanations. No server, database, or connector is required.
 
 ![How the Personal OS works](docs/diagram.svg)
 
@@ -10,6 +10,7 @@ A file-based chief of staff for people managing projects, decisions, and relatio
 
 | When | Command | Result |
 | --- | --- | --- |
+| First use | `/onboard` | Three questions, a private working picture, and a first brief. |
 | Morning | `/brief` | An HTML brief led by today's priority, decisions needed, and follow-ups. |
 | Evening | `/debrief` | Your raw dump saved verbatim; clear routine facts filed; material or uncertain changes shown for review. |
 | Weekly | `/os-review` | A read-only check for overdue decisions, stale commitments, and gaps in the base. |
@@ -25,9 +26,9 @@ git clone https://github.com/dx-dzbor/chief-of-staff.git
 cd chief-of-staff
 ```
 
-Open the folder in Claude Code or another agent that can read markdown skills. Say **"Read `INIT.md` and set me up."** The agent will help fill your role, voice, direction, projects, stakeholders, and team. It can start with one project and grow from there. Claude Code exposes the five commands in `.claude/commands/`; other agents can read the corresponding `.claude/skills/*/SKILL.md` files.
+Open the folder in Claude Code and run **`/onboard`**. In another agent, say **"Read `INIT.md` and onboard me."** The agent asks about your work, your most important near-term outcome, and your next move, one question at a time. It confirms a short working picture, creates your private `me/` files, and makes a first brief. It can learn projects, people, and voice examples later. Claude Code exposes the commands in `.claude/commands/`; other agents can read the corresponding `.claude/skills/*/SKILL.md` files.
 
-Then run `/brief` in the morning and `/debrief` after work. Run `/os-review` and `/weekly-status` each week. Try `/eli5 explain how a decision moves through this system` to see the visual format.
+After that first brief, onboarding offers to help set up an optional local weekday schedule. The command works without a schedule. Run `/debrief` after work and `/os-review` with `/weekly-status` each week. Try `/eli5 explain how a decision moves through this system` to see the visual format.
 
 Open the [fictional ELI5 example](docs/eli5-example.html) locally to see the intended HTML page and diagram.
 
@@ -38,13 +39,15 @@ CLAUDE.md          short operating contract and context loading rules
 CONTEXT.md         file formats and write boundaries
 MANUAL.md          daily loop and customization guide
 INIT.md            guided onboarding
-me/                your private working context, decisions, and update ledger
-.claude/skills/     brief, debrief, os-review, weekly-status, eli5
+templates/me/      public starter files and fictional examples
+me/                your private working context, ignored by Git after onboarding
+.claude/skills/     onboard, brief, debrief, os-review, weekly-status, eli5
 .claude/commands/   Claude Code command wrappers
+scripts/           safe private-context bootstrap
 docs/              diagram and fictional examples
 ```
 
-Every `me/projects/`, `me/stakeholders/`, and `me/team/` folder includes a `_TEMPLATE.md` and a fictional `EXAMPLE-*.md`. [The decision example](docs/decision-example.md) shows the active and closed record format. Replace the examples with your own context during onboarding.
+`templates/me/` includes starter files, entity templates, and fictional `EXAMPLE-*.md` files. `/onboard` uses `scripts/bootstrap_me.py` to copy the starters into private `me/` without the examples or overwriting existing files. [The decision example](docs/decision-example.md) shows the active and closed record format.
 
 ## How it stays useful
 
@@ -53,6 +56,7 @@ Every `me/projects/`, `me/stakeholders/`, and `me/team/` folder includes a `_TEM
 - Debrief writes straightforward notes directly. It asks before changing decisions, obligations, entities, or uncertain facts.
 - Skills draft and propose; they never send a message. `/os-review` never writes.
 - Generated `briefs/` and `explainers/` HTML is ignored by Git because it may contain private context.
+- The entire populated `me/` folder is ignored by Git. Review `git status` before pushing; never force-add private context to a public repository.
 
 Read [the manual](MANUAL.md) to tune the skills or add optional Slack, email, calendar, and meeting-note connections. The core works from local markdown alone.
 

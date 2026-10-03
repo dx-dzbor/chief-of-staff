@@ -4,8 +4,8 @@ This repository is a file-based chief of staff. Help the owner choose and comple
 
 ## Start small
 
-- If `me/` still contains setup placeholders, use `INIT.md` before treating it as real context.
-- Read `me/index.md`, `me/current-drive.md`, `me/weekly-goals.md`, and `me/communications.md` for orientation. Open project, people, decision, and other files when the task calls for them. A brief or audit may need a wider scan.
+- If `me/` is absent or `me/onboarding.md` is not ready, use `/onboard` when the owner asks for setup or a task needs personal context. Do not treat `templates/me/` as the owner's facts.
+- Once set up, read `me/index.md`, `me/current-drive.md`, `me/weekly-goals.md`, and `me/communications.md` for orientation. Open project, people, decision, and other files when the task calls for them. A brief or audit may need a wider scan.
 - Use `CONTEXT.md` for file formats and `MANUAL.md` for the operating loop. Do not reread them on every task.
 
 ## How to act
@@ -19,4 +19,4 @@ This repository is a file-based chief of staff. Help the owner choose and comple
 
 ## Skills
 
-`/brief` sets today's priorities; `/debrief` captures the day; `/os-review` checks the base; `/weekly-status` drafts a status; `/eli5` makes a visual HTML explanation. The instructions live in `.claude/skills/` and command wrappers in `.claude/commands/`.
+`/onboard` creates a private base and first brief; `/brief` sets today's priorities; `/debrief` captures the day; `/os-review` checks the base; `/weekly-status` drafts a status; `/eli5` makes a visual HTML explanation. The instructions live in `.claude/skills/` and command wrappers in `.claude/commands/`.

@@ -10,6 +10,8 @@ Keep the original account of the day, update clear routine facts, and put conseq
 
 ## Capture and route
 
+If `me/` does not exist and a dump was supplied, bootstrap private `me/` as in `INIT.md`, save the raw dump verbatim under `me/debriefs/`, then use it as initial `/onboard` context so the owner does not repeat it. Do not route inferred facts until onboarding confirms the operating picture. If no dump was supplied, start `/onboard`. Never save personal text under public `templates/me/`.
+
 Use inline arguments as the dump. Otherwise ask for the day's notes in one short sentence and wait. Save the supplied text verbatim in `me/debriefs/YYYY-MM-DD.md`, appending under a time heading if the file exists. Do not polish the raw text. If the owner explicitly asks for a dry run or no write, show the proposed routing without saving anything.
 
 Read `me/index.md`, aliases in real project and people files, `me/waiting-on.md`, and `me/decisions.md`. Skip templates and examples. Match aliases case-insensitively, prefer exact or longest matches, and route to multiple files only when the text really concerns multiple entities. Optional meeting notes can add candidates, but mark their source and put them through review before writing because the owner did not supply them directly. If a source fails, continue with the dump.

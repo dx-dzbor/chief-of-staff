@@ -1,6 +1,6 @@
 # Personal OS context
 
-This is a file-based chief-of-staff template. Plain markdown is the source of truth; skills turn it into priorities, capture, follow-through, status drafts, and visual explanations. It needs no server, database, account, or connector. Claude Code provides the slash-command wrappers; an agent that can read markdown skills can use the same instructions directly.
+This is a file-based chief-of-staff template. Plain markdown is the source of truth; skills turn it into priorities, capture, follow-through, status drafts, and visual explanations. It needs no server, database, or connector. Claude Code provides the slash-command wrappers; an agent that can read markdown skills can use the same instructions directly. `/onboard` copies public starter files from `templates/me/` into private, Git-ignored `me/`. Templates and fictional examples are never evidence about the owner.
 
 ## Operating loop
 
@@ -22,6 +22,10 @@ The base compounds because a fact is captured once and reused. Keep a current ho
 ## Files
 
 - `CLAUDE.md`: short operating contract and context loading rules.
+- `INIT.md`: short onboarding flow; `.claude/skills/onboard/SKILL.md` is its command entry point.
+- `scripts/bootstrap_me.py`: copies public starters into private `me/` without overwriting and checks Git privacy.
+- `templates/me/`: public starter files, entity templates, and fictional examples. Do not write the owner's context here.
+- `me/onboarding.md`: private setup stage and resume point.
 - `me/index.md`: orientation and an auto-generated directory of projects and people. Preserve all content outside its `AUTO-GENERATED` markers.
 - `me/current-drive.md`, `me/weekly-goals.md`: the current priority and near-term outcomes.
 - `me/communications.md`: default voice plus the owner's audience rules and worked examples.
@@ -31,6 +35,7 @@ The base compounds because a fact is captured once and reused. Keep a current ho
 - `me/decisions.md`: active and closed decisions with follow-through.
 - `me/waiting-on.md`: open and cleared obligations owed by others.
 - `briefs/` and `explainers/`: generated HTML, excluded from Git by default.
+- `me/`: all populated context, excluded from Git by default. Do not force-add it to this public template.
 
 ## Project and people files
 

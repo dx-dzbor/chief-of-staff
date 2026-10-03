@@ -18,7 +18,7 @@ This is the owner's voice guide. The defaults below work before onboarding; repl
 
 ## Worked examples
 
-Replace these with one or two short messages in your own voice during onboarding.
+Replace these with one or two short messages in your own voice when you have them. The first onboarding session does not require a writing sample.
 
 **Illustrative team update:** "The pilot is ready for review. Riley owns the final check by Thursday. I need Sam's decision on rollout scope before we announce a date."
 

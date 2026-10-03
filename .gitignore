@@ -1,4 +1,5 @@
 # Generated private artifacts
+/me/
 briefs/
 explainers/
 *.html

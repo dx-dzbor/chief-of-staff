@@ -5,6 +5,8 @@ description: Run a read-only health audit of the Personal OS, including overdue 
 
 # OS review
 
+If `me/` does not exist, report that setup has not started and point to `/onboard`; do not create files.
+
 Read the relevant `me/` files and report only. Never write files or resolve an item during the audit.
 
 Check active `me/decisions.md` records for checkpoints due today or overdue, missing follow-through where the source says an action exists, and decisions that appear closed in notes but remain active. Check `me/waiting-on.md` for overdue or stale commitments. Then check stale advice (over 14 days), projects without meaningful updates (7 or 14 days according to coverage), dormant key relationships, frontmatter or alias errors, orphaned files, and unfinished placeholders or example files.

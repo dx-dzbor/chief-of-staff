@@ -6,6 +6,8 @@ argument-hint: "[--for <stakeholder-slug>]"
 
 # Weekly status
 
+If `me/` does not exist, explain that there is no private context to draft from and point to `/onboard`.
+
 Draft for the owner to review and send. Never send it.
 
 Read the last seven days of `me/updates/raw/YYYY-MM.md`, `me/weekly-goals.md`, and relevant active or closed entries in `me/decisions.md`. If the ledger is young or empty, use recent debriefs and project notes, and say when evidence is thin. The ledger records events; the decisions file supplies current decision state. Avoid counting the same event twice.

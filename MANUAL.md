@@ -1,6 +1,14 @@
 # Personal OS manual
 
-Use `INIT.md` to set up the template. `CONTEXT.md` defines the file formats and write boundaries. This guide explains the daily loop.
+Run `/onboard` to set up the template; `INIT.md` contains the same flow for other agents. `CONTEXT.md` defines the file formats and write boundaries. This guide explains the daily loop.
+
+## First session
+
+The public starter files live in `templates/me/`. Onboarding runs `scripts/bootstrap_me.py` to copy them into a private `me/` folder, excluding fictional examples and preserving existing files. It asks about the owner's work, one near-term outcome, and the next concrete move, one question at a time. A rough dump can answer several questions at once. The agent shows its short operating picture before writing it, then makes a first `/brief`. `me/onboarding.md` records where to resume if the owner stops midway. See the [fictional conversation](docs/onboarding-example.md).
+
+The first brief is useful with one project or even just one clear outcome. Add people, longer-term goals, voice samples, and status audiences when a real task needs them. Public templates are never evidence of the owner's work.
+
+At the end, onboarding offers a recurring task. The owner can keep running `/brief` manually. If they opt into a weekday schedule, give the task a local working folder, time, and timezone. In Claude Desktop's Code tab, choose **Routines → New routine → Local**, point it to this folder, select weekdays, and use: "In this folder, run `/brief` for today. Use local `me/` context, save the HTML brief, and report the top action and link. Do not send messages." Run it once to check the output and permissions. Local tasks need the Desktop app open and the computer awake. A cloud routine clones the public repository and cannot read this machine's ignored `me/` files, so it is not the default for this template. [Claude Desktop scheduling guide](https://code.claude.com/docs/en/desktop-scheduled-tasks).
 
 ## Daily loop
 
@@ -28,7 +36,7 @@ If you want to preview a debrief without changing files, ask for a **dry run** o
 
 ## Voice and trust
 
-The baseline voice is short, direct, and actionable. Lead with the point; say what happened, why it matters, and who does what next. Keep enough context to be clear on the first read. `me/communications.md` contains the owner's audience rules and real examples after onboarding. Facts and recommendations stay distinct, and missing evidence is named. No skill auto-sends a message.
+The baseline voice is short, direct, and actionable. Lead with the point; say what happened, why it matters, and who does what next. Keep enough context to be clear on the first read. The owner can add audience rules and real examples to `me/communications.md` later. Facts and recommendations stay distinct, and missing evidence is named. No skill auto-sends a message.
 
 ## Customize and extend
 
@@ -36,6 +44,10 @@ Edit the markdown skills under `.claude/skills/` and their wrappers under `.clau
 
 Connectors are optional. When available, `/brief` can use Slack, email, calendar, and meeting notes as signals; `/debrief` can propose meeting-note candidates for review. A markdown-only base still produces a useful brief. If you replace agent-authored HTML with a renderer, keep the same input files and output paths so the commands remain compatible.
 
-Generated HTML may contain sensitive personal or company context. `briefs/` and `explainers/` are ignored by Git; review a page before sharing it. The public repository contains only templates and fictional examples.
+Generated HTML may contain sensitive personal or company context. `me/`, `briefs/`, and `explainers/` are ignored by Git; review a page before sharing it. The public repository contains only templates and fictional examples.
+
+### Existing installs with tracked `me/` files
+
+Older versions tracked starter files under `me/`. If you have filled those files, **copy the whole `me/` folder outside the repository before updating**. After updating, put your copy back in `me/` if needed and check `git check-ignore -v me/index.md` and `git ls-files me`: the first should show the `/me/` rule and the second should print nothing. A fresh clone of the updated template followed by copying your old `me/` folder into it is the simplest migration. Do not force-add `me/` to a public repository. If a previous commit already contains personal information, ignoring it now does not erase that history; review the repository's history and visibility separately.
 
 After changing a skill, use the [fictional skill scenarios](docs/skill-scenarios.md) in a disposable copy to check both the output and what files changed.
