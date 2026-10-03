@@ -1,36 +1,30 @@
 # Communications
 
-How you write, so any draft the system produces sounds like you.
+This is the owner's voice guide. The defaults below work before onboarding; replace the bracketed examples with real samples. Audience guidance and approved examples take precedence over the defaults when they conflict.
+
+## Default voice
+
+- Lead with the point or requested decision. Use short, complete sentences and familiar words.
+- Say what happened, why it matters, and what happens next. Name the owner and date when known.
+- Use specific evidence and numbers. If the source is unclear, say so.
+- Cut filler, throat-clearing, vague reassurance, and invented certainty. Brevity means easy to understand on the first read.
+- Do not use em dashes in drafted output.
 
 ## Registers
 
-<!-- How you adapt by audience. Adjust these to your own context. -->
+- **Team / cross-functional:** State the outcome, owner, next step, and any tradeoff.
+- **Exec / skip-level:** Lead with the decision or risk, its impact, and the ask.
+- **Public / brand:** Use concrete proof and credit the people who did the work.
 
-- **Team / cross-functional:** [for example, clarity on priorities and tradeoffs; name the owner and
-  the next action; no surprise escalations.]
-- **Exec / skip-level:** [for example, confidence without hand-waving; one-line risk first; quantify
-  impact; be explicit about what is blocked.]
-- **Public / brand:** [for example, concrete proof points and named people; energetic, never pompous.]
+## Worked examples
 
-## Hard Rules
+Replace these with one or two short messages in your own voice during onboarding.
 
-<!-- Style rules that travel into every draft. Keep the no-em-dashes rule; the rest are yours. -->
+**Illustrative team update:** "The pilot is ready for review. Riley owns the final check by Thursday. I need Sam's decision on rollout scope before we announce a date."
 
-- Never use em-dashes. Use short dashes or rewrite the sentence.
-- [Lead with a TL;DR. Bullets over walls of text.]
-- [Concrete numbers and percentages over vague claims.]
-- [Name the owner and the next action.]
+**Illustrative exec update:** "The launch is on track for 12 October. The open risk is support capacity. I recommend a staged rollout and need a decision by Tuesday."
 
-## Worked Examples
+## Rejected patterns
 
-<!-- One or two short samples in your real voice. The system imitates these. -->
-
-Gold standard, [register], to [audience]:
-> [Paste or draft a short message that sounds exactly like you.]
-
-## Rejected Patterns
-
-<!-- Openers and habits you never want to see in a draft. -->
-
-- [For example: "We are making good progress" with no evidence.]
-- [For example: over-anonymized abstractions that hide who did the work.]
+- "We are making good progress" without evidence or a next action.
+- Long introductions before the decision or ask.

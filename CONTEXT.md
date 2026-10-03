@@ -1,171 +1,60 @@
-# Personal OS Context
+# Personal OS context
 
-This repository is a **Personal OS**: a file-based chief-of-staff system that helps a busy
-professional stay oriented across projects, stakeholders, team dynamics, and daily signals. It runs on
-plain markdown plus a small set of skills, inside any AI coding agent (Claude Code, etc.). Nothing here
-depends on a server, a database, or live connectors. You own the files; the skills turn them into
-briefs, updates, and prep.
+This is a file-based chief-of-staff template. Plain markdown is the source of truth; skills turn it into priorities, capture, follow-through, status drafts, and visual explanations. It needs no server, database, account, or connector. Claude Code provides the slash-command wrappers; an agent that can read markdown skills can use the same instructions directly.
 
-## The Core Idea
-
-A Personal OS is two things working together:
-
-1. A curated knowledge base of plain markdown files that hold what matters about the work: role,
-   projects, relationships, voice, the narrative being pushed, and how the person is evaluated.
-2. A small set of skills (slash commands) that read from and write back to that base. The user curates
-   and directs; the skills turn the base into briefs, updates, and prep.
-
-Three properties make it work:
-
-- **One source of truth per thing.** The index reflects the files; lists are not hand-maintained in
-  two places.
-- **Compounding capture.** Daily debriefs feed weekly and monthly synthesis, so writing things down
-  once pays off repeatedly.
-- **Safe by default.** Skills draft and propose. Audits are read-only. Nothing is auto-sent.
-
-## The Layers
-
-1. **Identity and voice:** `me/profile.md`, `me/personal-narrative.md`, `me/communications.md`,
-   `me/expectations.md`, `me/role.md`, `me/role-expectations.md`.
-2. **Direction:** `me/current-drive.md` (the one thing driven end to end), `me/weekly-goals.md`,
-   `me/long_term_goals.md`, `me/waiting-on.md`, `me/exec_steer.md`.
-3. **Project memory:** `me/projects/*.md`, one durable file per active initiative.
-4. **People memory:** `me/stakeholders/top|other/*.md` and `me/team/*.md`.
-5. **Capture and output:** `me/debriefs/*`, `me/updates/*`, and the generated `briefs/*.html`.
-6. **Signal layer (optional):** Slack, email, calendar, and meeting notes. The template bundles no
-   connectors, but the skills use them if your environment has them and skip them gracefully if not. A
-   markdown-only base still produces a full brief. See "Extending the System" in `MANUAL.md`.
-
-## The Daily / Weekly Loop
+## Operating loop
 
 ```text
-morning   /brief              read pass: write briefs/YYYY-MM-DD.html, refresh the index, log an entry
-day       (do the work)
-evening   /debrief            write pass: route the day into the base after approval, feed the ledger
-weekly    /os-review          health check: stale advice, inactive projects, dropped balls
-weekly+   /weekly-status      turn captured work into a status draft
+current drive + goals + projects + people + decisions + waiting-on
+                         ↓ /brief
+                  today's actions (HTML)
+                         ↓ do the work
+                      /debrief
+          raw dump + routine facts + reviewed changes
+                         ↓
+             decision follow-through + update ledger
+                         ↓ /os-review and /weekly-status
+                 clean-up actions + status draft
 ```
 
-The asymmetry is the safety model. `/brief` is a read pass: it reads the base (and any connectors) and
-writes only the generated HTML, the regenerated index, and a log entry. `/debrief` is the only command
-that writes meaningful new knowledge, and it never writes before showing a routing plan and getting
-approval.
+The base compounds because a fact is captured once and reused. Keep a current home for each state: project files for project state, people files for relationship context, `me/waiting-on.md` for current obligations owed by others, and `me/decisions.md` for current decisions. The update ledger is dated event history, not a second copy of current state.
 
-## Folder Contract
+## Files
 
-```text
-personal_os/
-  CLAUDE.md                      bootloader and reading order
-  CONTEXT.md                     this architecture guide
-  MANUAL.md                      how to use and customize the system
-  README.md                      quickstart
-  INIT.md                        AI-led onboarding interview
-  me/
-    index.md                     dashboard
-    log.md                       append-only operating log
-    profile.md  personal-narrative.md  communications.md  expectations.md
-    role.md  role-expectations.md  current-drive.md  weekly-goals.md  waiting-on.md
-    exec_steer.md  long_term_goals.md  calendar.md
-    projects/                    one file per active initiative (_TEMPLATE.md + your files)
-    stakeholders/top|other/      one file per stakeholder
-    team/                        one file per team member
-    debriefs/                    raw evening dumps
-    updates/                     config.md, raw/YYYY-MM.md (ledger), YYYY-MM/_month-summary.md
-  briefs/                        generated morning briefs (YYYY-MM-DD.html), git-ignored
-  .claude/
-    commands/                    slash-command wrappers
-    skills/                      brief, debrief, os-review, weekly-status
-```
+- `CLAUDE.md`: short operating contract and context loading rules.
+- `me/index.md`: orientation and an auto-generated directory of projects and people. Preserve all content outside its `AUTO-GENERATED` markers.
+- `me/current-drive.md`, `me/weekly-goals.md`: the current priority and near-term outcomes.
+- `me/communications.md`: default voice plus the owner's audience rules and worked examples.
+- `me/projects/*.md`, `me/stakeholders/{top,other}/*.md`, `me/team/*.md`: durable project and people context. Ignore `_TEMPLATE.md` and `EXAMPLE-*.md` as live evidence.
+- `me/debriefs/YYYY-MM-DD.md`: the owner's raw words, saved verbatim.
+- `me/updates/raw/YYYY-MM.md`: material dated events used for status drafts.
+- `me/decisions.md`: active and closed decisions with follow-through.
+- `me/waiting-on.md`: open and cleared obligations owed by others.
+- `briefs/` and `explainers/`: generated HTML, excluded from Git by default.
 
-## File Schemas
+## Project and people files
 
-### Project file (`me/projects/<slug>.md`)
+Project frontmatter uses `name`, `status` (`active | paused | done`), `coverage` (`full | selective | passive`), `aliases`, and `priority` (`P0` to `P3`). Optional connector selectors are `slack_channels`, `slack_people`, and `email_filters`; `stakeholders` links people to the project. The usual headings are Overview, Coverage Policy, Current State, Open Questions / Blockers, Plan / Next Steps, and Notes.
 
-```yaml
----
-name: Project Aurora
-status: active            # active | paused | done
-coverage: full            # full | selective | passive
-slack_channels: [aurora-eng]
-slack_people: [riley]
-stakeholders: [sam]
-email_filters:
-  - subject_contains: "[Aurora]"
-aliases: [aurora, project aurora]
-priority: P0              # P0 | P1 | P2 | P3
----
-```
+Stakeholder frontmatter uses `name`, `role`, `projects`, and `aliases`, with optional `slack_handle`. Its durable sections are Relationship Context, Concerns + Patterns, Advice & Suggestions, Open Asks, and Interaction Log. Team frontmatter uses `name`, `level`, `manager`, `joined`, `projects`, `aliases`, and `status`; its sections are Role & Work, Strengths & Archetype, Career Aspirations, Stakeholder Feedback, and Notes. See each `_TEMPLATE.md` for the exact shape.
 
-Headings: `## Overview`, `## Coverage Policy`, `## Current State`, `## Open Questions / Blockers`,
-`## Plan / Next Steps`, `## Notes`. `coverage` controls how much chatter a brief surfaces: full tracks
-at detail level, selective only big or stakeholder-authored items, passive stays quiet.
+Aliases help debrief route clear mentions. An alias match is evidence of a possible destination, not permission to invent a claim or update a record whose meaning is uncertain.
 
-### Stakeholder file (`me/stakeholders/top/<slug>.md`)
+## Decisions and events
 
-```yaml
----
-name: Sam
-slack_handle: sam
-role: VP Engineering
-projects: [aurora, atlas]
-aliases: [sam]
----
-```
+`me/decisions.md` has `## Active` and `## Closed`, newest first. A record has a stable daily ID (`D-YYYYMMDD-NN`), decision date, short decision, source, and `owner`, `next`, and `checkpoint` when they apply. Use `none` for unknown or inapplicable optional fields. Add a brief reason only when supported. A closed record keeps its original text and adds close date, outcome, and `closed-source`. The fictional format is in `docs/decision-example.md`.
 
-Headings: `## Relationship Context`, `## Concerns + Patterns`, `## Advice & Suggestions` (dated, with
-status), `## Open Asks` (surfaced against calendar items in the brief), `## Interaction Log` (dated,
-oldest-first).
+The update ledger keeps one-line events: `- [type] (proj: <slug>; ppl: <slug>) <concrete event>`. Valid types are `shipped | progress | decision | win | risk | ask | narrative`. A decision event enters the ledger when the reviewed decision record is created or materially changed. Weekly status reads events for what happened and decisions for what remains open.
 
-### Team file (`me/team/<slug>.md`)
+## Write boundaries
 
-```yaml
----
-name: Riley
-level: Senior Engineer
-manager: [your_slug]
-joined: 2025-03-01
-projects: [aurora]
-aliases: [riley]
-status: active           # active | on-leave | departed
----
-```
+- `/brief` may write its HTML, the auto-generated index region, and a dated operating log line. It does not change knowledge records.
+- `/debrief` saves the supplied raw dump and clear additive facts directly. It presents decisions, obligation changes, new entities, state rewrites, and uncertain routing for review before applying them. Skipping pending changes does not undo routine capture.
+- `/os-review` reads only. `/weekly-status` drafts only. `/eli5` writes only its generated HTML.
+- Skills never send email or messages on the owner's behalf.
 
-Headings: `## Role & Work`, `## Strengths & Archetype`, `## Career Aspirations`,
-`## Stakeholder Feedback` (what others say, dated), `## Notes` (dated, oldest-first).
+Date and attribute captured facts. Append dated notes oldest first under `### YYYY-MM-DD`; keep current decision and waiting-on lists newest first. Turn relative dates into absolute dates when the source permits it. Follow `me/communications.md` for tone and avoid em dashes in drafted output.
 
-## The Compounding Update Engine
+## Optional signals
 
-Event sourcing for status updates: capture cheap daily nuggets, then let each higher tier read the
-tier below instead of reprocessing raw dumps.
-
-```text
-/debrief          appends nuggets to me/updates/raw/YYYY-MM.md          (write-ahead log)
-/weekly-status    reads the last 7 days of that ledger                  (light view)
-(monthly)         roll the month into me/updates/YYYY-MM/_month-summary (materialized view)
-(quarterly)       roll up the monthly summaries                         (never re-reads raw)
-```
-
-Nugget format: `- [type] (proj: <slug>; ppl: <slug>) <one concrete line, numbers where possible>`
-where `type` is one of `shipped | progress | decision | win | risk | ask | narrative`. The contract:
-daily capture stays cheap, and higher tiers read summaries, not raw debriefs. That is what makes it
-compound instead of becoming a chore.
-
-## Conventions and Invariants
-
-- **Aliases drive routing.** Every project and person lists `aliases`; `/debrief` matches dump text
-  against them to decide which file a line belongs in.
-- **One source of truth.** `index.md` reflects frontmatter; do not maintain the same list twice.
-- **Dated and attributed.** Advice, asks, logs: `YYYY-MM-DD | source | content`. Relative dates become
-  absolute on write.
-- **Append oldest-first** under `### YYYY-MM-DD` headings in interaction logs and notes.
-- **Drafts, not sends.** Update skills write files; they never post to Slack or email.
-- **Read-only audits.** `/os-review` never writes.
-- **No em-dashes** in any drafted output.
-
-## What This Template Deliberately Excludes
-
-No bundled connectors, database, persistent vector memory, auth, or multi-user permissions. The skills
-will use Slack, Gmail, Calendar, or a meeting-notes provider if your environment exposes them, but
-nothing is shipped or required, and every scan degrades gracefully. The base is plain markdown for you
-and your agent to read and for the skills to operate on. The value here is the operating logic and the
-data contract. See `MANUAL.md` for how to wire in connectors or swap the brief for a script renderer.
+Slack, email, calendar, and meeting notes may enrich relevant work if connected. A missing connector is not an error or evidence of no activity. Keep source links and distinguish observed signals from recommendations. The core system must work from markdown alone.

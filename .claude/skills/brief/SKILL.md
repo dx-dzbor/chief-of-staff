@@ -1,88 +1,33 @@
 ---
 name: brief
-description: Generate the morning chief-of-staff brief. Use when the user types /brief, asks for a morning brief, today's context, or what's on their plate today.
-argument-hint: "(optional) date override or focus area"
+description: Create an actionable morning chief-of-staff brief when the owner asks what matters today, requests a morning brief, or invokes /brief.
+argument-hint: "(optional) date or focus area"
 ---
 
-# /brief - Morning Brief
+# Morning brief
 
-Read the `me/` base, scan any configured external signal, write a dated HTML brief, open it, refresh
-the index, and append a log entry. The HTML is the artifact. Do not summarize it in chat.
+Turn the owner's current context into a short decision and action surface. Write a self-contained `briefs/YYYY-MM-DD.html`, open it when possible, and return one line in chat with the top action and a link. Use the system date unless the user supplies another date.
 
-> No Python is required: you author the HTML directly. A user can later swap in a script renderer; keep
-> the same inputs and section order so it stays a drop-in replacement.
+## Gather the signal
 
-## Hard Rules
+Read `me/communications.md`, `me/current-drive.md`, `me/weekly-goals.md`, `me/decisions.md`, and `me/waiting-on.md`. Use `me/index.md` to find relevant active projects and people. If its generated lists are empty or stale, scan project and people frontmatter and refresh those lists. Open detail files when they affect today's priorities, meetings, or blockers; scan more widely only when the request requires it. Check recent `me/log.md` entries for carryover. Skip `_TEMPLATE.md`, `EXAMPLE-*.md`, and unfilled placeholder content as evidence.
 
-- Read `me/communications.md` first and obey its style rules in all rendered prose. No em-dashes.
-- Read-only on knowledge: the only files you write are the HTML brief, the regenerated `me/index.md`,
-  and the `me/log.md` entry.
-- Every external scan is optional. If a connector is missing, note it internally and continue. Missing
-  integrations never block the brief.
-- Use today's system date unless the user passed a date override.
+If available, use relevant Slack, email, calendar, or meeting-note signals. Honor project `coverage`: `full` follows meaningful detail, `selective` surfaces material or stakeholder-authored items, and `passive` stays quiet unless directly relevant. Missing connectors never block a brief. Do not treat silence from an unavailable connector as evidence that nothing happened. Link to external items used.
 
-## Read (in order)
+## Decide what to show
 
-1. `me/index.md` (orientation), `me/profile.md`, `me/communications.md`.
-2. `me/current-drive.md`, `me/expectations.md`, `me/weekly-goals.md`.
-3. Last 3 entries of `me/log.md` (carryover and recent loop state).
-4. All routable project files under `me/projects/**/*.md` (frontmatter has `aliases`; skip files
-   without it, like `_TEMPLATE.md`). Honor each project's `coverage`.
-5. All `me/stakeholders/top/*.md` and `me/stakeholders/other/*.md`, all `me/team/*.md`.
-6. `me/waiting-on.md`, `me/calendar.md`.
+Lead the page with:
 
-## Optional external scans (use if available, else skip with a note)
+1. **Today's priority:** the highest-leverage concrete move, grounded in the current drive and weekly goals. Name its owner and timing when known.
+2. **Decisions needed:** active decisions at a checkpoint, overdue decisions, and decisions the owner must make today. Do not relabel ordinary tasks as decisions.
+3. **Follow-ups:** obligations where the owner is blocking someone, open waiting-on items due or stale, and any preparation needed for the next consequential meeting.
 
-- **Slack, last 24h.** Per project, pull its `slack_channels` and `slack_people`. Apply `coverage`:
-  `full` surfaces meaningful signal and suggested actions; `selective` only stakeholder-authored or
-  materially important items; `passive` stays quiet unless directly mentioned. Roll up top-stakeholder
-  activity to one line (channels, count, topic) without re-listing project messages. Scan any broader
-  context channel groups for stakeholder posts and large items only (incidents, launches, leadership).
-- **Gmail, last 24h.** For projects with `email_filters`, surface subject, sender, snippet, link.
-- **Calendar, today + tomorrow.** Otherwise fall back to `me/calendar.md`. Flag `prep needed` when an
-  agenda/doc is attached, the title implies review/decision/1:1, or the meeting touches a project with
-  open blockers or a stakeholder with open asks. Cross-reference attendees to stakeholder `## Open Asks`
-  and stale `## Advice & Suggestions` and attach inline. Flag conflicts and early starts.
-- **Where I am the blocker.** Resolve the user's identity, then surface unreplied Slack DMs/mentions,
-  threads where the last reply is not the user's, and human email threads awaiting the user. Render each
-  as one action line: `<who> - <what they need> - <link>`. Skip ambient chatter.
+Then add only sections that contain real signal: project changes, stakeholder context, calendar shape, an acceleration idea, or a weekly expectations check. Merge repeated items instead of restating them in several sections. Give credit by name when supported. If the base is sparse, show the few known actions and the missing context plainly; do not fill the page with placeholders or generic productivity advice.
 
-## HTML sections (in order; omit a section cleanly if it has nothing real)
+For each action, say **who**, **what**, and **when** if known. Keep facts separate from recommendations. A recommendation should explain the evidence behind it in one short line. Apply the owner's voice guide, and do not use em dashes.
 
-1. **Driving end-to-end** - from `current-drive.md`: name, period, narrative one-liner, blocker, a
-   one-line nudge for today. Renders first always; if no drive is set, show a banner: "No current drive
-   set - pick one before end of day."
-2. **Today's focus** - 3 to 5 bullets synthesized from carryover, weekly goals, top project state,
-   calendar, and waiting-on. Current-drive items sort to the top. Lead with the single most important.
-3. **Acceleration check** - the signature lens: "Is this maximally accelerated?" (replace with the
-   user's own lens if they have one). For the drive and top 1 to 2 projects, give 2 to 3 concrete
-   faster moves (a decision waiting on someone, a step that could be parallelized, an ask to make
-   today). Omit the section entirely if there is no real signal; never use filler.
-4. **Today's shape** - today's remaining events and tomorrow's, as one-liners. Lead with the next
-   meeting needing prep and say what prep. Call out conflicts, stakeholder meetings with open asks.
-5. **Where I am the blocker** - the blocker scan, action-framed. Omit if empty.
-6. **Waiting on others** - from `waiting-on.md` `## Open`, newest first, overdue/stale flagged. Do not
-   duplicate items already attached to a meeting above unless the chase is urgent.
-7. **Project updates** - one subsection per active project: status, 24h signal, stakeholder messages
-   inline, 2 to 4 suggested actions, matching email, blockers. Apply coverage.
-8. **Top stakeholders** - roll up activity, surface open or stale advice and open asks. Preparation,
-   not exhaustive activity.
-9. **Broader context** - configured channel groups: stakeholder posts and materially large items only.
-10. **Expectations check** - run on Mondays, or if absent from the last 7 log days. From
-    `expectations.md` + last 7 log entries + activity: 4 to 6 bullets on which dimensions showed up,
-    which went quiet, and evidence. Omit on other days unless a real signal warrants it.
+## Deliver
 
-This is an action surface, not an inbox digest. Name the people who did good work so credit is easy.
-
-## Post-actions
-
-1. Write the HTML to `briefs/YYYY-MM-DD.html` (visual, section headers, bullets, links to Slack
-   permalinks and email threads where available).
-2. Open it in the browser if the environment supports it.
-3. Regenerate `me/index.md` from frontmatter, preserving its manual sections (see the AUTO-GENERATED
-   markers in that file).
-4. Append a brief entry to `me/log.md`:
-   `## [YYYY-MM-DD HH:MM] brief` then one line with counts (projects scanned, messages, emails,
-   calendar events, prep-needed, blocker items).
-5. Return only one short line:
-   `morning brief written to briefs/YYYY-MM-DD.html and opened in browser`
+- Generate readable, mobile-friendly HTML with inline CSS and no required external assets. Make the top actions visible without scrolling on a typical desktop screen. Escape untrusted text from files and connectors before inserting it into HTML.
+- Write only the brief, the auto-generated region of `me/index.md` when it needs refreshing, and a dated `me/log.md` entry. Do not change project, people, decision, or waiting-on records.
+- Open the HTML if supported. In chat, give the top action and a clickable path to the artifact; do not repeat the entire brief.

@@ -6,24 +6,22 @@ role: [your_role]
 
 # Personal OS Index
 
-<!-- The block between the AUTO-GENERATED markers is regenerated from file frontmatter by /brief and
-     /debrief. Do not hand-edit it. Everything outside the markers is preserved across regenerations. -->
+<!-- The block between AUTO-GENERATED markers is refreshed from project and people frontmatter. Preserve everything outside those markers. -->
 
 ## Operating Picture
 
-[One paragraph: who you are, where you work, and what you are focused on right now. Two or three
-sentences.]
+[One short paragraph: who you are, what you own, and where your attention is now.]
 
 ## Current Theme
 
-[One line that captures the season. The north star you keep coming back to.]
+[The one line you want to keep returning to.]
 
-## Read First
+## Start Here
 
-- `profile.md` for role and working style.
-- `current-drive.md` for the one thing being driven end to end.
-- `weekly-goals.md` for this week's outcomes.
-- `personal-narrative.md`, `communications.md`, `expectations.md` for voice and how I am judged.
+- `current-drive.md` and `weekly-goals.md` for the current direction.
+- `communications.md` for the owner's voice.
+- `decisions.md` and `waiting-on.md` when deciding what needs follow-through.
+- Open project and people files when they are relevant to the task. Use `profile.md`, `personal-narrative.md`, and `expectations.md` when their context changes the answer.
 
 <!-- AUTO-GENERATED:START -->
 

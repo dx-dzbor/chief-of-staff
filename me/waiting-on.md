@@ -5,8 +5,7 @@ status: active
 
 # Waiting On
 
-Things other people owe you. `/debrief` prepends new open items and moves cleared ones; `/brief`
-surfaces open items with overdue and stale flags so nothing quietly drops.
+Things other people owe you. `/debrief` proposes opening, changing, or clearing these items for review before applying them. `/brief` surfaces open items when they need a follow-up. This is current obligation state, not a history of every mention.
 
 ## Open
 

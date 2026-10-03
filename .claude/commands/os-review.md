@@ -1,5 +1,3 @@
 # /os-review
 
-Run a read-only health audit of the Personal OS base.
-
-Invoke the `os-review` skill (`.claude/skills/os-review/SKILL.md`). Report findings only; never write.
+Invoke `.claude/skills/os-review/SKILL.md`. Report actionable issues, including overdue decision checkpoints and commitments. This command is read-only.
